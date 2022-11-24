@@ -1,0 +1,63 @@
+@extends('userprofile')
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="style.css">
+    </head>
+@section('content')
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header"> <h1><br><b>Change Password<b><br></h1><br></div>
+
+                    <form action="{{ route('update-password') }}" method="POST">
+                        @csrf
+                        <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @elseif (session('error'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+
+                            <div class="mb-3">
+                                <label for="oldPasswordInput" class="form-label">Old Password</label>
+                                <input name="old_password" type="password" class="form-control @error('old_password') is-invalid @enderror" id="oldPasswordInput"
+                                    placeholder="Old Password">
+                                @error('old_password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="newPasswordInput" class="form-label">New Password</label>
+                                <input name="new_password" type="password" class="form-control @error('new_password') is-invalid @enderror" id="newPasswordInput"
+                                    placeholder="New Password">
+                                @error('new_password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmNewPasswordInput" class="form-label">Confirm New Password</label>
+                                <input name="new_password_confirmation" type="password" class="form-control" id="confirmNewPasswordInput"
+                                    placeholder="Confirm New Password">
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer">
+                            <button class="btn btn-success" onclick="window.location='{{ url("/userprofile") }}'" >Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
