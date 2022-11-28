@@ -47,7 +47,7 @@ class CompanyController extends Controller
 
         $company->save();
 
-        return redirect()->route('company')->with('success', 'Company Added successfully.');
+        return redirect()->back()->with('success', 'Company Added successfully.');
     }
 
     function editCompany($CompanyName)
@@ -83,99 +83,6 @@ class CompanyController extends Controller
         Company::where('CompanyName', '=', $CompanyName)->delete();
             return redirect()->back()->with('success', 'Company Deleted successfully.');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'CompanyName'    =>  'required',
-            'email'          =>  'required',
-            'address'        =>  'required',
-            'supervisor'     =>  'required',
-        ]);
-
-        $company = new Company;
-
-        $company->CompanyName = $request->CompanyName;
-        $company->email = $request->email;
-        $company->address = $request->$address;
-        $company->supervisor = $request->$supervisor;
-
-        $company->save();
-
-        return redirect()->route('company.index')->with('success', 'Company Added successfully.');
-    }
-
- 
-
-     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Company $company)
-    {
-        return view('edit', compact('company'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Company $company)
-    {
-        $request->validate([
-            'CompanyName'      =>  'required|CompanyName',
-            'email'     =>  'required|email',
-            'address'     =>  'required|address',
-            'supervisor'     =>  'required|supervisor',
-        ]);
-
-        $student->CompanyName = $request->CompanyName;
-
-        $student->email = $request->email;
-
-        $student->address = $request->address;
-
-        $student->supervisor = $request->supervisor;
-
-        $student->save();
-
-        return redirect()->route('company.index')->with('success', 'Company Data has been updated successfully');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Company $company)
-    {
-        $commpany->delete();
-
-        return redirect()->route('company.index')->with('success', 'Company Data deleted successfully');
-    }
-
         
     /**
     * @return \Illuminate\Support\Collection
@@ -192,7 +99,8 @@ class CompanyController extends Controller
     function import()
     {
         Excel::Import(new CompanyImport, request()->file('file'));
-        return redirect()->back();
+        //return redirect()->back();
+        return redirect()->back()->with('success', 'Company Excel Added successfully.');
     }
 
     public function insertform(){

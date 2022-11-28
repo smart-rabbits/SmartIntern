@@ -83,8 +83,6 @@ Route::controller(CompanyController::class)->group(function(){
 Route::get('/import_excel', [App\Http\Controllers\CompanyController::class,'index']);
 Route::post('/import', [App\Http\Controllers\CompanyController::class,'import']);
 
-//Route::resource('students', StudentController::class);
-
 Route::controller(CompanyController::class)->group(function(){
     Route::get('company', 'index')->name('index');
     Route::get('addCompany', 'index')->name('index');
