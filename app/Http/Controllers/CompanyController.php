@@ -7,30 +7,33 @@ use App\Models\Company;
 use App\Exports\CompanyExport;
 use App\Imports\CompanyImport;
 use Maatwebsite\Excel\Facades\Excel;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class CompanyController extends Controller
 {
     //
-    function show(){
-        $data=Company::all();
-        return view('company', ['company'=>$data]);
+    function show()
+    {
+        $data = Company::all();
+        return view('company', ['company' => $data]);
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     function index()
     {
         $data = DB::table('company')->get();
         return view('company', compact('data'));
     }
 
-    function addCompany(){
+    function addCompany()
+    {
         return view('addCompany');
     }
 
-    function saveCompany(Request $request){
+    function saveCompany(Request $request)
+    {
         $request->validate([
             'CompanyName'    =>  'required',
             'email'          =>  'required|email',
@@ -52,7 +55,7 @@ class CompanyController extends Controller
 
     function editCompany($CompanyName)
     {
-        $data = Company::where('CompanyName','=',$CompanyName)->first();
+        $data = Company::where('CompanyName', '=', $CompanyName)->first();
         return view('editCompany', compact('data'));
     }
 
@@ -71,30 +74,31 @@ class CompanyController extends Controller
         $supervisor = $request->supervisor;
 
         Company::where('CompanyName', '=', $CompanyName)->update([
-            'CompanyName'=>$CompanyName,
-            'email'=>$email,
-            'address'=>$address,
-            'supervisor'=>$supervisor
+            'CompanyName' => $CompanyName,
+            'email' => $email,
+            'address' => $address,
+            'supervisor' => $supervisor
         ]);
         return redirect()->back()->with('success', 'Company Edited successfully.');
     }
 
-    function deleteCompany($CompanyName){
+    function deleteCompany($CompanyName)
+    {
         Company::where('CompanyName', '=', $CompanyName)->delete();
-            return redirect()->back()->with('success', 'Company Deleted successfully.');
+        return redirect()->back()->with('success', 'Company Deleted successfully.');
     }
-        
+
     /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function export() 
+     * @return \Illuminate\Support\Collection
+     */
+    public function export()
     {
         return Excel::download(new CompanyExport, 'company.xlsx');
     }
-       
+
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
 
     function import()
     {
@@ -103,26 +107,27 @@ class CompanyController extends Controller
         return redirect()->back()->with('success', 'Company Excel Added successfully.');
     }
 
-    public function insertform(){
+    public function insertform()
+    {
         return view('addCompany');
-        }
-        public function insert(Request $request){
-            $this->validate($request,[
-                'file' => 'required|mimes:xls,xlsx'
-            ]);
-            $path = $request->file('file')->getRealPath();
-    
-            $data = Excel::load($path)->get();
+    }
+    public function insert(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:xls,xlsx'
+        ]);
+        $path = $request->file('file')->getRealPath();
+
+        $data = Excel::load($path)->get();
 
         $CompanyName = $request->input('CompanyName');
         $email = $request->input('email');
         $address = $request->input('address');
         $supervisor = $request->input('supervisor');
-        $data=array('CompanyName'=>$CompanyName,"email"=>$email,"address"=>$address,"supervisor"=>$supervisor);
+        $data = array('CompanyName' => $CompanyName, "email" => $email, "address" => $address, "supervisor" => $supervisor);
         DB::table('company')->insert($data);
 
         echo "Record inserted successfully.<br/>";
         echo '<a href = "/insert">Click Here</a> to go back.';
-        }
-
+    }
 }
