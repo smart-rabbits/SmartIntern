@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +22,28 @@ use App\Http\Controllers\CompanyController;
 Route::get('/', function () {
     //return view('welcome');
     return view('login');
+});
+
+Auth::routes();
+
+Route::middleware(['auth', 'user-access:student'])->group(function () {
+  
+    Route::get('/student/student-dashboard', [HomeController::class, 'studentDashboard'])->name('student.student-dashboard');
+});
+
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
+  
+    Route::get('/admin/coor-dashboard', [HomeController::class, 'coorDashboard'])->name('admin.coor-dashboard');
+});
+
+Route::middleware(['auth', 'user-access:com_sv'])->group(function () {
+  
+    Route::get('/com_sv/supervisor-dashboard', [HomeController::class, 'supervisorDashboard'])->name('com_sv.supervisor-dashboard');
+});
+
+Route::middleware(['auth', 'user-access:fac_sv'])->group(function () {
+  
+    Route::get('/fac_sv/lecturer-dashboard', [HomeController::class, 'lecturerDashboard'])->name('fac_sv.lecturer-dashboard');
 });
 
 Route::controller(SampleController::class)->group(function(){
@@ -109,3 +134,7 @@ Route::get('index',[App\Http\Controllers\CompanyController::class,'insertform'])
 Route::post('insert',[App\Http\Controllers\CompanyController::class,'index']);
 
 Route::get('editCompany/{CompanyName}',[App\Http\Controllers\CompanyController::class,'editCompany']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

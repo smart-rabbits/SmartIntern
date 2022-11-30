@@ -18,26 +18,44 @@ class SampleController extends Controller
 
     function validate_login(Request $request)
     {
-        $request->validate([
-            'email' =>  'required',
-            'password'  =>  'required'
+        $input = $request->all();
+     
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
-
-        $credentials = $request->only('email', 'password');
-
-        if(Auth::attempt($credentials))
+     
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
-            return redirect('student-dashboard');
-        }
-
-        return redirect('login')->with('success', 'Login details are not valid');
+            if (auth()->user()->type == 'admin') {
+                return redirect()->route('admin.coor-dashboard');
+            }else if (auth()->user()->type == 'com_sv') {
+                return redirect()->route('com_sv.supervisor-dashboard');
+            }else if (auth()->user()->type == 'fac_sv'){
+                return redirect()->route('fac_sv.lecturer-dashboard');
+            }else{
+                return redirect()->route('student.student-dashboard');
+            }
+        }else{
+            return redirect()->route('login')
+                ->with('error','Email-Address And Password Are Wrong.');
+        }   
     }
 
     function dashboard()
     {
         if(Auth::check())
         {
-            return view('student-dashboard');
+            //return view('student-dashboard');
+            if (auth()->user()->type == 'admin') {
+                return redirect()->route('coor-dashboard');
+            }else if (auth()->user()->type == 'com_sv') {
+                return redirect()->route('supervisor-dashboard');
+            }else if (auth()->user()->type == 'fac_sv'){
+                return redirect()->route('lecturer-dashboard');
+            }else{
+                return redirect()->route('student-dashboard');
+            }
         }
 
         return redirect('login')->with('success', 'you are not allowed to access');
