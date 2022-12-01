@@ -45,28 +45,7 @@
 					@enderror
 				</div>
 			</div>
-			<div class="row mb-3">
-				<label class="col-sm-2 col-label-form">Password</label>
-				<div class="col-sm-10">
-					<input type="password" name="password" class="form-control" placeholder="Enter password" value="{{ $data->password }}">
-					@error('password')
-					<div class="alert alert-danger" role="alert">
-						{{ $message }}
-					</div>
-					@enderror
-				</div>
-			</div>
-			<div class="row mb-3">
-				<label class="col-sm-2 col-label-form">Name</label>
-				<div class="col-sm-10">
-					<input type="text" name="name" class="form-control" placeholder="Enter name" value="{{ $data->name }}">
-					@error('name')
-					<div class="alert alert-danger" role="alert">
-						{{ $message }}
-					</div>
-					@enderror
-				</div>
-			</div>
+
             <div class="row mb-3">
 				<label class="col-sm-2 col-label-form">IC</label>
 				<div class="col-sm-10">
@@ -92,8 +71,7 @@
             <div class="row mb-3">
 				<label class="col-sm-2 col-label-form">Matric Number</label>
 				<div class="col-sm-10">
-					<input type="text" name="matricnum" class="form-control" placeholder="Enter Matric Number" value="{{ $data->matricnum }}">
-					@error('matricnum')
+
 					<div class="alert alert-danger" role="alert">
 						{{ $message }}
 					</div>
@@ -103,11 +81,7 @@
             <div class="row mb-3">
 				<label class="col-sm-2 col-label-form">Gender</label>
 				<div class="col-sm-10">
-					<select class="form-control" name="gender">
-						<option selected>Select your gender</option>
-						<option value="male">male</option>
-						<option value="female">female</option>
-					</select>
+
 					@error('gender')
 					<div class="alert alert-danger" role="alert">
 						{{ $message }}

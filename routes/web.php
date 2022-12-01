@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CompanyController;
@@ -22,7 +24,7 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::controller(SampleController::class)->group(function () {
+
 
     Route::get('login', 'index')->name('login');
 
@@ -155,6 +157,4 @@ Route::get('editStudent/{username}', [App\Http\Controllers\StudentController::cl
 //     return view('/importStudent');
 // });
 
-// Route::post('/importStudent', function () {
-//     return request()->all();
-// });
+

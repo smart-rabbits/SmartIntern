@@ -1,8 +1,3 @@
-@if($message = Session::get('success'))
-    <div class="alert alert-success">
-        {{ $message }}
-    </div>
-@endif
 
 <!DOCTYPE html>
 <html>
@@ -45,7 +40,7 @@
             </div>
             @endif
             <div class="card-body">
-                   <form method="post" enctype="multipart/form-data" action="{{ url('/studentImport') }}">
+
     {{ csrf_field() }}
     <div class="form-group">
      <table class="table">
@@ -91,7 +86,7 @@
                     <td>{{ $row->username }}</td>
                     <td>{{ $row->IC }}</td>
                     <td>{{ $row->email }}</td>
-                    <td>{{ $row->matricNum }}</td>
+
                     <td>{{ $row->gender }}</td>
                     <td>{{ $row->contact }}</td>
                     <td>{{ $row->address }}</td>
