@@ -20,6 +20,7 @@
 </div>
 
 @endif
+
 <div class="container">
 <div class="card">
 	<div class="card-header text-center">
@@ -44,6 +45,7 @@
 					@enderror
 				</div>
 			</div>
+
             <div class="row mb-3">
 				<label class="col-sm-2 col-label-form">IC</label>
 				<div class="col-sm-10">
@@ -69,8 +71,7 @@
             <div class="row mb-3">
 				<label class="col-sm-2 col-label-form">Matric Number</label>
 				<div class="col-sm-10">
-					<input type="text" name="matricNumber" class="form-control" placeholder="Enter Matric Number" value="{{ old('matricNumber') }}">
-					@error('matricNumber')
+
 					<div class="alert alert-danger" role="alert">
 						{{ $message }}
 					</div>
@@ -80,7 +81,7 @@
             <div class="row mb-3">
 				<label class="col-sm-2 col-label-form">Gender</label>
 				<div class="col-sm-10">
-					<input type="text" name="gender" class="form-control" placeholder="Enter Gender" value="{{ old('gender') }}">
+
 					@error('gender')
 					<div class="alert alert-danger" role="alert">
 						{{ $message }}

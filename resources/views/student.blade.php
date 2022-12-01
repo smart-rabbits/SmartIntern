@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +40,7 @@
             </div>
             @endif
             <div class="card-body">
-                   <form method="post" enctype="multipart/form-data" action="{{ url('/import') }}">
+
     {{ csrf_field() }}
     <div class="form-group">
      <table class="table">
@@ -85,7 +86,7 @@
                     <td>{{ $row->username }}</td>
                     <td>{{ $row->IC }}</td>
                     <td>{{ $row->email }}</td>
-                    <td>{{ $row->matricNumber }}</td>
+
                     <td>{{ $row->gender }}</td>
                     <td>{{ $row->contact }}</td>
                     <td>{{ $row->address }}</td>

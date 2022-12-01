@@ -10,5 +10,4 @@ class Student extends Model
     use HasFactory;
     public $table = 'student';
     public $timestamps = false;
-    protected $fillable = ["username", "IC", "email", "matricNumber", "gender", "contact", "address", "companyIntern"];
 }

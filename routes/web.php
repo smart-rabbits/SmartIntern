@@ -24,29 +24,7 @@ Route::get('/', function () {
     return view('login');
 });
 
-Auth::routes();
 
-Route::middleware(['auth', 'user-access:student'])->group(function () {
-  
-    Route::get('/student/student-dashboard', [HomeController::class, 'studentDashboard'])->name('student.student-dashboard');
-});
-
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
-  
-    Route::get('/admin/coor-dashboard', [HomeController::class, 'coorDashboard'])->name('admin.coor-dashboard');
-});
-
-Route::middleware(['auth', 'user-access:com_sv'])->group(function () {
-  
-    Route::get('/com_sv/supervisor-dashboard', [HomeController::class, 'supervisorDashboard'])->name('com_sv.supervisor-dashboard');
-});
-
-Route::middleware(['auth', 'user-access:fac_sv'])->group(function () {
-  
-    Route::get('/fac_sv/lecturer-dashboard', [HomeController::class, 'lecturerDashboard'])->name('fac_sv.lecturer-dashboard');
-});
-
-Route::controller(SampleController::class)->group(function(){
 
     Route::get('login', 'index')->name('login');
 
@@ -61,15 +39,13 @@ Route::controller(SampleController::class)->group(function(){
     Route::get('supervisor-dashboard', 'supervisor-dashboard')->name('supervisor-dashboard');
 
     Route::get('coor-dashboard', 'coor-dashboard')->name('coor-dashboard');
-
 });
 
-Route::controller(ProfileController::class)->group(function(){
+Route::controller(ProfileController::class)->group(function () {
 
     Route::get('profile', 'index')->name('profile');
 
-    Route::post('profile/edit_validation', 'edit_validation')->name('profile.edit_validation');    
-
+    Route::post('profile/edit_validation', 'edit_validation')->name('profile.edit_validation');
 });
 
 Route::get('/userprofile', function () {
@@ -96,25 +72,26 @@ Route::get('/change-password', [App\Http\Controllers\ProfileController::class, '
 
 Route::post('/change-password', [App\Http\Controllers\ProfileController::class, 'updatePassword'])->name('update-password');
 
+/*------------- Company Route Start-------------*/
 //Route::view('company', 'company');
-Route::get('company', [CompanyController::class,'show']);
+Route::get('company', [CompanyController::class, 'show']);
 
-Route::controller(CompanyController::class)->group(function(){
+Route::controller(CompanyController::class)->group(function () {
     Route::get('company', 'index');
     Route::get('company-export', 'export')->name('company.export');
     //Route::post('/company/import', 'import')->name('company.import');
 });
 
-Route::get('/import_excel', [App\Http\Controllers\CompanyController::class,'index']);
-Route::post('/import', [App\Http\Controllers\CompanyController::class,'import']);
+Route::get('/import_excel', [App\Http\Controllers\CompanyController::class, 'index']);
+Route::post('/import', [App\Http\Controllers\CompanyController::class, 'import']);
 
-Route::controller(CompanyController::class)->group(function(){
+Route::controller(CompanyController::class)->group(function () {
     Route::get('company', 'index')->name('index');
     Route::get('addCompany', 'index')->name('index');
     Route::get('addCompany', 'addCompany')->name('addCompany');
     Route::post('saveCompany', 'saveCompany')->name('saveCompany');
     //Route::get('editCompany/{CompanyName}', 'editCompany')->name('editCompany');
-    Route::post('updateCompany', 'updateCompany')->name('updateCompany');   
+    Route::post('updateCompany', 'updateCompany')->name('updateCompany');
     Route::get('deleteCompany/{CompanyName}', 'deleteCompany')->name('deleteCompany');
 });
 
@@ -130,11 +107,54 @@ Route::get('/deleteCompany', function () {
     return view('/deleteCompany');
 });
 
-Route::get('index',[App\Http\Controllers\CompanyController::class,'insertform']);
-Route::post('insert',[App\Http\Controllers\CompanyController::class,'index']);
+Route::get('index', [App\Http\Controllers\CompanyController::class, 'insertform']);
+Route::post('insert', [App\Http\Controllers\CompanyController::class, 'index']);
 
-Route::get('editCompany/{CompanyName}',[App\Http\Controllers\CompanyController::class,'editCompany']);
+Route::get('editCompany/{CompanyName}', [App\Http\Controllers\CompanyController::class, 'editCompany']);
+/*------------- Company Route End -------------*/
 
-Auth::routes();
+/*------------- Student Route Start-------------*/
+Route::get('student', [StudentController::class, 'show']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::controller(StudentController::class)->group(function () {
+    Route::get('student', 'index');
+    Route::get('student-export', 'export')->name('student.export');
+});
+
+Route::get('/import_excel', [App\Http\Controllers\StudentController::class, 'index']);
+Route::post('/import_student', [App\Http\Controllers\StudentController::class, 'importStudent']);
+
+Route::controller(StudentController::class)->group(function () {
+    Route::get('student', 'index')->name('index');
+    Route::get('addStudent', 'index')->name('index');
+    Route::get('addStudent', 'addStudent')->name('addStudent');
+    Route::post('saveStudent', 'saveStudent')->name('saveStudent');
+    //Route::get('editCompany/{CompanyName}', 'editCompany')->name('editCompany');
+    Route::post('updateStudent', 'updateStudent')->name('updateStudent');
+    Route::get('deleteStudent/{username}', 'deleteStudent')->name('deleteStudent');
+    Route::post('studentImport', 'importStudent');
+});
+
+Route::get('/addStudent', function () {
+    return view('/addStudent');
+});
+
+Route::get('/editStudent', function () {
+    return view('/editStudent');
+});
+
+Route::get('/deleteStudent', function () {
+    return view('/deleteStudent');
+});
+
+Route::get('index', [App\Http\Controllers\StudentController::class, 'insertform']);
+Route::post('insert', [App\Http\Controllers\StudentController::class, 'index']);
+
+Route::get('editStudent/{username}', [App\Http\Controllers\StudentController::class, 'editStudent']);
+/*------------- Company Route End -------------*/
+
+// Route::get('/importStudent', function () {
+//     return view('/importStudent');
+// });
+
+
