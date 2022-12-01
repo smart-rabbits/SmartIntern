@@ -35,7 +35,7 @@ class StudentController extends Controller
     function saveStudent(Request $request)
     {
         $request->validate([
-            'Username'      =>  'required',
+            'username'      =>  'required',
             'password'      =>  'required',
             'name'          =>  'required',
             'IC'            =>  'required',
@@ -77,7 +77,7 @@ class StudentController extends Controller
             'username'    =>  'required',
             'password'          =>  'required',
             'name'        =>  'required',
-            'IC'     =>  'IC',
+            'IC'     =>  'required',
             'email'          =>  'required|email',
             'matricnum'     =>  'required',
             'gender'    =>  'required',
