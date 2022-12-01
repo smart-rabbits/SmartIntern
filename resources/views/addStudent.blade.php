@@ -20,6 +20,7 @@
 </div>
 
 @endif
+
 <div class="container">
 <div class="card">
 	<div class="card-header text-center">
@@ -47,7 +48,7 @@
 			<div class="row mb-3">
 				<label class="col-sm-2 col-label-form">Password</label>
 				<div class="col-sm-10">
-					<input type="text" name="password" class="form-control" placeholder="Enter password" value="{{ old('password') }}">
+					<input type="password" name="password" class="form-control" placeholder="Enter password" value="{{ old('password') }}">
 					@error('password')
 					<div class="alert alert-danger" role="alert">
 						{{ $message }}
@@ -102,7 +103,12 @@
             <div class="row mb-3">
 				<label class="col-sm-2 col-label-form">Gender</label>
 				<div class="col-sm-10">
-					<input type="text" name="gender" class="form-control" placeholder="Enter Gender" value="{{ old('gender') }}">
+					<select class="form-control" name="gender">
+						<option selected>Select your gender</option>
+						<option value="male">male</option>
+						<option value="female">female</option>
+					</select>
+					{{-- <input type="text" name="gender" class="form-control" placeholder="Enter Gender" value="{{ old('gender') }}"> --}}
 					@error('gender')
 					<div class="alert alert-danger" role="alert">
 						{{ $message }}

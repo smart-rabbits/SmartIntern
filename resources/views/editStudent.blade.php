@@ -48,7 +48,7 @@
 			<div class="row mb-3">
 				<label class="col-sm-2 col-label-form">Password</label>
 				<div class="col-sm-10">
-					<input type="text" name="password" class="form-control" placeholder="Enter password" value="{{ $data->password }}">
+					<input type="password" name="password" class="form-control" placeholder="Enter password" value="{{ $data->password }}">
 					@error('password')
 					<div class="alert alert-danger" role="alert">
 						{{ $message }}
@@ -103,7 +103,11 @@
             <div class="row mb-3">
 				<label class="col-sm-2 col-label-form">Gender</label>
 				<div class="col-sm-10">
-					<input type="text" name="gender" class="form-control" placeholder="Enter Gender" value="{{ $data->gender }}">
+					<select class="form-control" name="gender">
+						<option selected>Select your gender</option>
+						<option value="male">male</option>
+						<option value="female">female</option>
+					</select>
 					@error('gender')
 					<div class="alert alert-danger" role="alert">
 						{{ $message }}
