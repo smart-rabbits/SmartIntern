@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,14 +32,14 @@
                 </div>
             @endif
 
-            @if($message = Session::get('success'))
+            {{-- @if($message = Session::get('success'))
             <div class="alert alert-success alert-block">
                 <button type="button" class="close" data-dismiss="alert">x</button>
                 <strong>{{ $message }} </strong>
             </div>
-            @endif
+            @endif --}}
             <div class="card-body">
-
+                   <form method="post" enctype="multipart/form-data" action="{{ url('/studentImport') }}">
     {{ csrf_field() }}
     <div class="form-group">
      <table class="table">
@@ -86,7 +85,7 @@
                     <td>{{ $row->username }}</td>
                     <td>{{ $row->IC }}</td>
                     <td>{{ $row->email }}</td>
-
+                    <td>{{ $row->matricNum }}</td>
                     <td>{{ $row->gender }}</td>
                     <td>{{ $row->contact }}</td>
                     <td>{{ $row->address }}</td>
