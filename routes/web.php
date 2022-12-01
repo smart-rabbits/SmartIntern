@@ -25,6 +25,7 @@ Route::get('/', function () {
 });
 
 
+Route::controller(SampleController::class)->group(function () {
 
     Route::get('login', 'index')->name('login');
 
