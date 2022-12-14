@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +20,18 @@ Route::get('/', function () {
 });
 
 //Authentication
-Route::post('loginuser','AuthenticationController@login');
-Route::get('signout','AuthenticationController@signout');
+Route::post('loginuser', 'AuthenticationController@login');
+Route::get('signout', 'AuthenticationController@signout');
 
 
 //Home
-Route::get('home','HomeController@index');
+Route::get('home', 'HomeController@index');
 
 
 //Admin
-Route::get('students','AdminController@students');
-Route::post('storestudent','AdminController@storeStudent');
+Route::get('students', 'AdminController@students');
+Route::post('storestudent', 'AdminController@storeStudent');
+
+//Student survey
+Route::get('/surveyform', 'StudentSurveyController@show');
+Route::post('/studentsurvey', 'StudentSurveyController@survey');
