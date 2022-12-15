@@ -31,3 +31,8 @@ Route::get('home','HomeController@index');
 //Admin
 Route::get('students','AdminController@students');
 Route::post('storestudent','AdminController@storeStudent');
+
+//Supervisor Survey
+Route::resource('svSurvey', 'SvController');
+Route::get('insert', 'SvController@show');
+Route::post('svSurvey', 'SvController@insert');
