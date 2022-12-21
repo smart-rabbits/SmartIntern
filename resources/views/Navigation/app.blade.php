@@ -183,4 +183,11 @@
       
     </ul>
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="insert">
+          <i class="bi bi-person"></i>
+          <span>Student Survey</span>
+        </a>
+    </li><!-- End Survey Page Nav -->
+
   </aside><!-- End Sidebar-->

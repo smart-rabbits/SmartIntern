@@ -34,6 +34,7 @@ Route::post('profileupd', 'AuthenticationController@profileupd');
 //Admin
 Route::get('students', 'AdminController@students');
 Route::post('storestudent', 'AdminController@storeStudent');
+
 Route::get('deleteStudent/{id}', 'AdminController@destroy');
 Route::get('fsupervisor', 'AdminController@fsupervisor');
 Route::post('storefsupervisor', 'AdminController@storefsupervisor');
@@ -51,13 +52,16 @@ Route::get('MyStudentsComp', 'CompanySupervisorController@index');
 //Export
 Route::get('exportusr', 'AuthenticationController@export')->name('export');
 
+
 //Supervisor Survey
 //Route::resource('svSurvey', 'SvController');
 Route::get('insert', 'SvController@show');
 Route::post('svSurvey', 'SvController@insert');
+
 Route::get('list', 'SvController@view');
 
 //Student
 Route::get('MyLogbooks', 'StudentsController@index');
 Route::post('storelogbook', 'StudentsController@store');
 Route::get('deleteLogbook/{id}', 'StudentsController@destroy');
+

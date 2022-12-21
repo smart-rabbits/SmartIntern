@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+
 use Carbon\Carbon;
 
 class StudentsController extends Controller
@@ -15,6 +17,7 @@ class StudentsController extends Controller
     public function index()
     {
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,10 +35,10 @@ class StudentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store()
     {
     }
-
     /**
      * Display the specified resource.
      *
@@ -65,7 +68,9 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update()
+
+    public function update(Request $request)
+
     {
     }
 
@@ -75,7 +80,9 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
     }
+
 }
