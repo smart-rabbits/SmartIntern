@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Students;
+use App\CompanySupervisor;
 
-class HomeController extends Controller
+class CompanySupervisorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +15,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      $id = CompanySupervisor::where('user_id',auth()->user()->id)->first()->company_id;
+
+      $students =  Students::where('company_id',$id)->get();
+
+      return view('CompanySupervisor.myStudents',compact('students'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,7 +39,7 @@ class HomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         //
     }
@@ -59,18 +66,7 @@ class HomeController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update()
-    {
-        //
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      *

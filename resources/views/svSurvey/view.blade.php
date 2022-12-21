@@ -1,21 +1,45 @@
-<!DOCTYPE html>
-<html>
-    <div class="row">
-        <div class="col-md-12">
-         <br />
-         <h3 align="center">Supervisor Survey</h3>
-         <br />
-         @if($message = Session::get('success'))
-         <div class="alert alert-success">
-          <p>{{$message}}</p>
-         </div>
-         @endif
-         <div align="right">
-          <a href="{{route('svSurvey.show')}}" class="btn btn-primary">Add</a>
-          <br />
-          <br />
-         </div>          
-            <table class="table table-bordered mt-3">
+@include('Navigation.app')
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+
+<main id="main" class="main">
+
+<div class="pagetitle">
+  <h1>Survey</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="home">Home</a></li>
+      <li class="breadcrumb-item active">Supervisor Survey</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+<section class="section dashboard">
+      <div class="card">
+            <div class="card-body">
+
+  <h5 class="card-title">Survey</h5>
+
+  <br>
+
+@if($message = Session::get('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+<strong>Yay !</strong> {{ session()->get('success') }}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+@if($message = Session::get('error'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+<strong>Whoops !</strong> {{ session()->get('error') }}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+<table class="table table-striped" id="mytable">
                 <tr>
                     <th>Supervisor Name</th>
                     <th>Email</th>
@@ -39,3 +63,5 @@
             </table>
 </body>
 </html>
+@include('Navigation.footer')
+

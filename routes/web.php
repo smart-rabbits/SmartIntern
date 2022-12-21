@@ -27,17 +27,41 @@ Route::get('signout', 'AuthenticationController@signout');
 //Home
 Route::get('home', 'HomeController@index');
 
+//profile
+Route::get('profile', 'AuthenticationController@profile');
+Route::post('profileupd', 'AuthenticationController@profileupd');
 
 //Admin
 Route::get('students', 'AdminController@students');
 Route::post('storestudent', 'AdminController@storeStudent');
 
-//Student survey
-// Route::resource('stuSurvey', 'StuSurveyController');
-Route::get('insert', 'StuSurveyController@show');
-Route::post('stuSurvey', 'StuSurveyController@insert');
+Route::get('deleteStudent/{id}', 'AdminController@destroy');
+Route::get('fsupervisor', 'AdminController@fsupervisor');
+Route::post('storefsupervisor', 'AdminController@storefsupervisor');
+Route::get('deleteFsupervisor/{id}', 'AdminController@destroy2');
+Route::get('company', 'AdminController@company');
+Route::post('storecompany', 'AdminController@storecompany');
+Route::get('deleteCsupervisor/{id}', 'AdminController@destroy3');
+
+//Faculty Supervisor
+Route::get('MyStudents', 'FacultySupervisorController@index');
+
+//Company Supervisor
+Route::get('MyStudentsComp', 'CompanySupervisorController@index');
+
+//Export
+Route::get('exportusr', 'AuthenticationController@export')->name('export');
+
 
 //Supervisor Survey
-Route::resource('svSurvey', 'SvController');
+//Route::resource('svSurvey', 'SvController');
 Route::get('insert', 'SvController@show');
 Route::post('svSurvey', 'SvController@insert');
+
+Route::get('list', 'SvController@view');
+
+//Student
+Route::get('MyLogbooks', 'StudentsController@index');
+Route::post('storelogbook', 'StudentsController@store');
+Route::get('deleteLogbook/{id}', 'StudentsController@destroy');
+

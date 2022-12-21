@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Students;
+use App\FacultySupervisor;
+use App\logbooks;
 
-class HomeController extends Controller
+class FacultySupervisorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +16,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      $id = FacultySupervisor::where('user_id',auth()->user()->id)->first()->id;
+
+      $students =  Students::where('faculty_sv_id',$id)->get();
+
+      return view('FacultySupervisor.myStudents',compact('students'));
     }
 
     /**
@@ -32,7 +39,7 @@ class HomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         //
     }
@@ -66,10 +73,6 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update()
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

@@ -15,7 +15,70 @@
     <section class="section dashboard">
       <div class="row">
 
-        <!-- Left side columns -->
+      @if(auth()->user()->role == 'Student')
+      <?php
+
+?>
+      <!-- Left side columns -->
+      <div class="col-lg-12">
+          <div class="row">
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+  
+
+                <div class="card-body">
+                 
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-journal-medical"></i>
+                    </div>
+                    <div class="ps-3">
+                     
+                     
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+            <!-- Revenue Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+
+
+                <div class="card-body">
+                 
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-journal-text"></i>
+                    </div>
+                    <div class="ps-3">
+                    
+                   
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Revenue Card -->
+            </div><!-- End Revenue Card -->
+            </div><!-- End Revenue Card -->
+
+            @elseif(auth()->user()->role == 'Admin')
+            <?php
+$totalstudent = App\User::where('role','Student')->count();
+$totalsupervisor = App\User::where('role','Faculty Supervisor')->count();
+$totalcompany = App\User::where('role','Company Supervisor')->count();
+?>
+               <!-- Left side columns -->
         <div class="col-lg-12">
           <div class="row">
 
@@ -33,7 +96,7 @@
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>0</h6>
+                      <h6>{{ $totalstudent }}</h6>
                      
 
                     </div>
@@ -56,7 +119,7 @@
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>0</h6>
+                      <h6>{{ $totalsupervisor }}</h6>
                    
 
                     </div>
@@ -81,7 +144,7 @@
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>0</h6>
+                      <h6>{{ $totalcompany }}</h6>
                  
 
                     </div>
@@ -96,6 +159,97 @@
 
           </div>
         </div><!-- End Left side columns -->
+        @elseif(auth()->user()->role == 'Faculty Supervisor')
+
+        <?php
+      $id = App\FacultySupervisor::where('user_id',auth()->user()->id)->first()->id;
+
+      $totalstudents =  App\Students::where('faculty_sv_id',$id)->count();
+
+      $studentid =  App\Students::where('faculty_sv_id',$id)->pluck('user_id');
+
+
+?>
+               <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+  
+
+                <div class="card-body">
+                  <h5 class="card-title">My Students</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-people"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{ $totalstudents }}</h6>
+                     
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+      
+
+          </div>
+        </div><!-- End Left side columns -->
+
+        @elseif(auth()->user()->role == 'Company Supervisor')
+
+        <?php
+       $id = App\CompanySupervisor::where('user_id',auth()->user()->id)->first()->company_id;
+
+      $totalstudents =  App\Students::where('company_id',$id)->count();
+
+      $studentid =  App\Students::where('company_id',$id)->pluck('user_id');
+
+
+?>
+         <!-- Left side columns -->
+         <div class="col-lg-12">
+          <div class="row">
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+  
+
+                <div class="card-body">
+                  <h5 class="card-title">My Students</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-people"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{ $totalstudents }}</h6>
+                     
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+            
+        
+
+      
+
+          </div>
+        </div><!-- End Left side columns -->
+        @endif
 
       
 

@@ -51,7 +51,7 @@
             <input type="text" class="form-control" id="svStu" placeholder="Student Name" name="svStu" required>
            </div> <br>
            <div class="form-group">
-            <label for="rating">How would you rate your intern in terms of work ethics, attitude, and responsibility?: </label>
+            <label for="rating">How would you rate your intern in terms of work ethics, attitude, and responsibility?: </label> <br>
             <input type="radio" id="rate1" name="rate" value="1">
             <label for="rate1">1</label>&nbsp
             <input type="radio" id="rate2" name="rate" value="2">

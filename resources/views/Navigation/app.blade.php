@@ -10,24 +10,26 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/internship.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="../assets/img/internship.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
 
 </head>
 
@@ -38,7 +40,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="home" class="logo d-flex align-items-center">
-        <img src="assets/img/internship.png" alt="">
+        <img src="../assets/img/internship.png" alt="">
         <span class="d-none d-lg-block">SmartIntern</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -58,7 +60,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/user.png" alt="Profile" class="rounded-circle">
+            <img src="../assets/img/user.png" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->username }}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -72,7 +74,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="/profile">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -80,7 +82,7 @@
            
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="signout">
+              <a class="dropdown-item d-flex align-items-center" href="/signout">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -100,42 +102,85 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="home">
+        <a class="nav-link collapsed" href="/home">
           <i class="bi bi-house-door"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
 
+      @if(auth()->user()->role == "Admin")
       <li class="nav-item">
-        <a class="nav-link collapsed" href="students">
-          <i class="bi bi-person"></i>
+        <a class="nav-link collapsed" href="/students">
+          <i class="bi bi-people-fill"></i>
           <span>Student Management</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="bi bi-person"></i>
+        <a class="nav-link collapsed" href="/fsupervisor">
+          <i class="bi bi-person-lines-fill"></i>
           <span>Faculty Supervisor</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="bi bi-person"></i>
+        <a class="nav-link collapsed" href="/company">
+          <i class="bi bi-person-badge"></i>
           <span>Company Management</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="svSurvey.form">
+        <a class="nav-link collapsed" href="list">
           <i class="bi bi-person"></i>
           <span>Survey</span>
         </a>
       </li><!-- End Survey Page Nav -->
+
+
+      @endif
+
+      @if(auth()->user()->role == "Student")
+      <li class="nav-item">
+        
+      </li><!-- End Profile Page Nav -->
+      @endif
+
+      @if(auth()->user()->role == "Faculty Supervisor")
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/MyStudents">
+          <i class="bi bi-person"></i>
+          <span>My Students</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+      @endif
+
+      @if(auth()->user()->role == "Company Supervisor")
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/MyStudentsComp">
+          <i class="bi bi-person"></i>
+          <span>My Students</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="insert">
+          <i class="bi bi-person"></i>
+          <span>Survey</span>
+        </a>
+      </li><!-- End Survey Page Nav -->
+
+      @endif
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/profile">
+          <i class="bi bi-person-circle"></i>
+          <span>My Profile</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+      
     </ul>
 
       <li class="nav-item">
