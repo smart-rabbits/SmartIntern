@@ -49,12 +49,11 @@
                   <span class="d-none d-lg-block">SmartIntern</span>
                 </a>
               </div><!-- End Logo -->
-              @if($message = Session::get('error'))
+@if($message = Session::get('error'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
 <strong>Whoops !</strong> {{ session()->get('error') }}
 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-
 @endif
               <div class="card mb-3">
 

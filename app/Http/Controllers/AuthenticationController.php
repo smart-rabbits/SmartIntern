@@ -10,6 +10,8 @@ use App\CompanySupervisor;
 use App\Admin;
 use App\Students;
 use App\FacultySupervisor;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AuthenticationController extends Controller
 {
@@ -68,6 +70,8 @@ class AuthenticationController extends Controller
 
             $user = FacultySupervisor::where('staffID',$request->input('staffid'))->first();
 
+         
+
             if($user != ''){
     
                 $user = User::where('id',$user->user_id)->first();
@@ -118,5 +122,57 @@ class AuthenticationController extends Controller
     {
         auth()->logout();
         return redirect('/');
+    }
+
+    public function profile(Request $request)
+    {
+       return view('profile');
+    }
+
+    public function profileupd(Request $request){
+
+        if(auth()->user()->role == 'Student'){
+         $getstd = Students::where('user_id',auth()->user()->id)->first();
+
+         Students::where('id',$getstd->id)->update([
+            "FullName" => $request->input('FullName'),
+            "gender" => $request->input('gender'),
+            "contact" => $request->input('contact'),
+            "address" => $request->input('address'),
+         ]);
+
+         
+        }
+        else if(auth()->user()->role == 'Admin'){
+            $getstd = Admin::where('user_id',auth()->user()->id)->first();
+            Admin::where('id',$getstd->id)->update([
+                "gender" => $request->input('gender'),
+                "contact" => $request->input('contact'),
+                "address" => $request->input('address'),
+             ]);
+        }
+        else if(auth()->user()->role == 'Faculty Supervisor'){
+            $getstd = FacultySupervisor::where('user_id',auth()->user()->id)->first();
+            FacultySupervisor::where('id',$getstd->id)->update([
+                "FullName" => $request->input('FullName'),
+                "gender" => $request->input('gender'),
+                "contact" => $request->input('contact'),
+                "address" => $request->input('address'),
+             ]);
+        }
+        else if(auth()->user()->role == 'Company Supervisor'){
+            $getstd = CompanySupervisor::where('user_id',auth()->user()->id)->first();
+            CompanySupervisor::where('id',$getstd->id)->update([
+                "FullName" => $request->input('FullName'),
+                "gender" => $request->input('gender'),
+                "contact" => $request->input('contact')
+             ]);
+        }
+        return redirect()->back()->with('success', 'Your profile has been successfully updated!');
+    }
+
+    public function export() 
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 }

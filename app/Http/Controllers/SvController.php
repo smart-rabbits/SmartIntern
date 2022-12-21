@@ -1,11 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 
-//use App\Notifications\ContactFormMessage;
 use App\Http\Controllers\Controller;
-//use App\Http\Requests\svFormRequest;
-//use App\Sv;
 use DB;
 use Illuminate\Http\Request;
 
@@ -22,6 +18,12 @@ class SvController extends Controller
      return view('svSurvey.index', compact('svSurvey'));
  }
 
+ public function view()
+ {
+    $data = DB::table('sv_survey')->get();
+    return view('svSurvey.view', ['data'=> $data]);
+ }
+
  public function insert(Request $request){
     $svName = $request->input('svName');
     $email = $request->input('email');
@@ -33,7 +35,6 @@ class SvController extends Controller
     
     $data=array('svName'=>$svName,"email"=>$email, "svCompany"=>$svCompany, "svStu"=>$svStu, "rate"=>$rate, "reason"=>$reason, "comment"=>$comment);
     DB::table('sv_survey')->insert($data);
-    echo "Form submitted successfully.<br/>";
-    echo '<a href = "/insert">Click Here</a> to go back.';
+    return redirect()->back()->with('success', 'Survey has been successfully added !');
     }
 }
