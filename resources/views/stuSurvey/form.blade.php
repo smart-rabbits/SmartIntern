@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <form class="form-horizontal" method="POST" action="studentsurvey">
+        <form class="form-horizontal" method="POST" action="/stuSurvey" action="/action_page.php>
 
           {{ csrf_field() }}
               

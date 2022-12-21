@@ -33,5 +33,6 @@ Route::get('students', 'AdminController@students');
 Route::post('storestudent', 'AdminController@storeStudent');
 
 //Student survey
-Route::get('/surveyform', 'StudentSurveyController@show');
-Route::post('/studentsurvey', 'StudentSurveyController@survey');
+// Route::resource('stuSurvey', 'StuSurveyController');
+Route::get('insert', 'StuSurveyController@show');
+Route::post('stuSurvey', 'StuSurveyController@insert');
