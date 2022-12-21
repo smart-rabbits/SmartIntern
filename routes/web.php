@@ -36,3 +36,8 @@ Route::post('storestudent', 'AdminController@storeStudent');
 // Route::resource('stuSurvey', 'StuSurveyController');
 Route::get('insert', 'StuSurveyController@show');
 Route::post('stuSurvey', 'StuSurveyController@insert');
+
+//Supervisor Survey
+Route::resource('svSurvey', 'SvController');
+Route::get('insert', 'SvController@show');
+Route::post('svSurvey', 'SvController@insert');

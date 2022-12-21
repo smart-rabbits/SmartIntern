@@ -129,6 +129,13 @@
           <span>Company Management</span>
         </a>
       </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="svSurvey.form">
+          <i class="bi bi-person"></i>
+          <span>Survey</span>
+        </a>
+      </li><!-- End Survey Page Nav -->
     </ul>
 
       <li class="nav-item">
