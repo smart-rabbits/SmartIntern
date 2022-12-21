@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
-class HomeController extends Controller
+class StudentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
     }
 
     /**
@@ -34,7 +34,6 @@ class HomeController extends Controller
      */
     public function store()
     {
-        //
     }
 
     /**
@@ -68,7 +67,6 @@ class HomeController extends Controller
      */
     public function update()
     {
-        //
     }
 
     /**
@@ -79,6 +77,5 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }
