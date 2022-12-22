@@ -61,7 +61,3 @@ Route::post('svSurvey', 'SvController@insert');
 Route::get('list', 'SvController@view');
 
 //Student
-Route::get('MyLogbooks', 'StudentsController@index');
-Route::post('storelogbook', 'StudentsController@store');
-Route::get('deleteLogbook/{id}', 'StudentsController@destroy');
-
