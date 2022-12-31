@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Facades\Hash;
 use App\CompanySupervisor;
 use App\Admin;
 use App\Students;
@@ -19,102 +19,82 @@ class AuthenticationController extends Controller
     {
         $role = $request->input('role');
 
-        if($role == 'admin'){
+        if ($role == 'admin') {
 
-        $user = Admin::where('staffID',$request->input('staffid'))->first();
+            $user = Admin::where('staffID', $request->input('staffid'))->first();
 
-        if($user != ''){
+            if ($user != '') {
 
-            $user = User::where('id',$user->user_id)->first();
+                $user = User::where('id', $user->user_id)->first();
 
-            if(Hash::check($request->input('password'), $user->password)){
-                auth()->login($user);
-
-                return redirect()->to('/home');
-            }
-            else{
-                return redirect()->back()->with('error', 'The Staff ID or Password is incorrect, Please try again');
-            }
-
-        }
-        else{
-            return redirect()->back()->with('error', 'The Staff ID or Password is incorrect, Please try again');
-        }
-
-        }
-        else if($role == 'student'){
-
-
-            $user = Students::where('matricNum',$request->input('matricno'))->first();
-
-            if($user != ''){
-    
-                $user = User::where('id',$user->user_id)->first();
-    
-                if(Hash::check($request->input('password'), $user->password)){
+                if (Hash::check($request->input('password'), $user->password)) {
                     auth()->login($user);
-    
+
                     return redirect()->to('/home');
-                }
-                else{
-                    return redirect()->back()->with('error', 'The Matric No or Password is incorrect, Please try again');
-                }
-    
-            }
-            else{
-                return redirect()->back()->with('error', 'The Matric No or Password is incorrect, Please try again');
-            }
-
-        }
-        else if($role == 'fsup'){
-
-            $user = FacultySupervisor::where('staffID',$request->input('staffid'))->first();
-
-         
-
-            if($user != ''){
-    
-                $user = User::where('id',$user->user_id)->first();
-    
-                if(Hash::check($request->input('password'), $user->password)){
-                    auth()->login($user);
-    
-                    return redirect()->to('/home');
-                }
-                else{
+                } else {
                     return redirect()->back()->with('error', 'The Staff ID or Password is incorrect, Please try again');
                 }
-    
-            }
-            else{
+            } else {
                 return redirect()->back()->with('error', 'The Staff ID or Password is incorrect, Please try again');
             }
+        } else if ($role == 'student') {
 
-        }
-        else if($role == 'csup'){
 
-            $user = CompanySupervisor::where('email',$request->input('email'))->first();
+            $user = Students::where('matricNum', $request->input('matricno'))->first();
 
-            if($user != ''){
-    
-                $user = User::where('id',$user->user_id)->first();
-    
-                if(Hash::check($request->input('password'), $user->password)){
+            if ($user != '') {
+
+                $user = User::where('id', $user->user_id)->first();
+
+                if (Hash::check($request->input('password'), $user->password)) {
                     auth()->login($user);
-    
+
                     return redirect()->to('/home');
+                } else {
+                    return redirect()->back()->with('error', 'The Matric No or Password is incorrect, Please try again');
                 }
-                else{
+            } else {
+                return redirect()->back()->with('error', 'The Matric No or Password is incorrect, Please try again');
+            }
+        } else if ($role == 'fsup') {
+
+            $user = FacultySupervisor::where('staffID', $request->input('staffid'))->first();
+
+
+
+            if ($user != '') {
+
+                $user = User::where('id', $user->user_id)->first();
+
+                if (Hash::check($request->input('password'), $user->password)) {
+                    auth()->login($user);
+
+                    return redirect()->to('/home');
+                } else {
+                    return redirect()->back()->with('error', 'The Staff ID or Password is incorrect, Please try again');
+                }
+            } else {
+                return redirect()->back()->with('error', 'The Staff ID or Password is incorrect, Please try again');
+            }
+        } else if ($role == 'csup') {
+
+            $user = CompanySupervisor::where('email', $request->input('email'))->first();
+
+            if ($user != '') {
+
+                $user = User::where('id', $user->user_id)->first();
+
+                if (Hash::check($request->input('password'), $user->password)) {
+                    auth()->login($user);
+
+                    return redirect()->to('/home');
+                } else {
                     return redirect()->back()->with('error', 'The Email or Password is incorrect, Please try again');
                 }
-    
-            }
-            else{
+            } else {
                 return redirect()->back()->with('error', 'The Email or Password is incorrect, Please try again');
             }
-
         }
-
     }
 
 
@@ -126,52 +106,48 @@ class AuthenticationController extends Controller
 
     public function profile(Request $request)
     {
-       return view('profile');
+        return view('profile');
     }
 
-    public function profileupd(Request $request){
+    public function profileupd(Request $request)
+    {
 
-        if(auth()->user()->role == 'Student'){
-         $getstd = Students::where('user_id',auth()->user()->id)->first();
+        if (auth()->user()->role == 'Student') {
+            $getstd = Students::where('user_id', auth()->user()->id)->first();
 
-         Students::where('id',$getstd->id)->update([
-            "FullName" => $request->input('FullName'),
-            "gender" => $request->input('gender'),
-            "contact" => $request->input('contact'),
-            "address" => $request->input('address'),
-         ]);
-
-         
-        }
-        else if(auth()->user()->role == 'Admin'){
-            $getstd = Admin::where('user_id',auth()->user()->id)->first();
-            Admin::where('id',$getstd->id)->update([
-                "gender" => $request->input('gender'),
-                "contact" => $request->input('contact'),
-                "address" => $request->input('address'),
-             ]);
-        }
-        else if(auth()->user()->role == 'Faculty Supervisor'){
-            $getstd = FacultySupervisor::where('user_id',auth()->user()->id)->first();
-            FacultySupervisor::where('id',$getstd->id)->update([
+            Students::where('id', $getstd->id)->update([
                 "FullName" => $request->input('FullName'),
                 "gender" => $request->input('gender'),
                 "contact" => $request->input('contact'),
                 "address" => $request->input('address'),
-             ]);
-        }
-        else if(auth()->user()->role == 'Company Supervisor'){
-            $getstd = CompanySupervisor::where('user_id',auth()->user()->id)->first();
-            CompanySupervisor::where('id',$getstd->id)->update([
+            ]);
+        } else if (auth()->user()->role == 'Admin') {
+            $getstd = Admin::where('user_id', auth()->user()->id)->first();
+            Admin::where('id', $getstd->id)->update([
+                "gender" => $request->input('gender'),
+                "contact" => $request->input('contact'),
+                "address" => $request->input('address'),
+            ]);
+        } else if (auth()->user()->role == 'Faculty Supervisor') {
+            $getstd = FacultySupervisor::where('user_id', auth()->user()->id)->first();
+            FacultySupervisor::where('id', $getstd->id)->update([
+                "FullName" => $request->input('FullName'),
+                "gender" => $request->input('gender'),
+                "contact" => $request->input('contact'),
+                "address" => $request->input('address'),
+            ]);
+        } else if (auth()->user()->role == 'Company Supervisor') {
+            $getstd = CompanySupervisor::where('user_id', auth()->user()->id)->first();
+            CompanySupervisor::where('id', $getstd->id)->update([
                 "FullName" => $request->input('FullName'),
                 "gender" => $request->input('gender'),
                 "contact" => $request->input('contact')
-             ]);
+            ]);
         }
         return redirect()->back()->with('success', 'Your profile has been successfully updated!');
     }
 
-    public function export() 
+    public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
