@@ -117,8 +117,8 @@ class AdminController extends Controller
                 return redirect()->back()->with('error', 'The Matric Number already exist, Please try again');
             }
 
-            $student = User::where('id', $getstudent->user_id)->update([
 
+            $student = User::where('id', $getstudent->user_id)->update([
                 'username' => $request->input('username'),
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('IC')),
@@ -186,7 +186,6 @@ class AdminController extends Controller
                 'password' => Hash::make($request->input('IC')),
                 'role' => 'Faculty Supervisor',
                 'updated_at' => Carbon::now()
-
             ]);
 
             FacultySupervisor::Insert([
@@ -225,12 +224,18 @@ class AdminController extends Controller
                 return redirect()->back()->with('error', 'The Staff ID already exist, Please try again');
             }
 
+            if(Hash::check($request->input('IC'), $getuser->password)){
+                $password = Hash::make($request->input('IC'));
+            }
+            else{
+                $password = $getuser->password;
+            }
   
             $student = User::where('id',$getstaff->user_id)->update([
 
                 'username' => $request->input('username'),
                 'email' => $request->input('email'),
-                'password' => Hash::make($request->input('IC')),
+                'password' => $password,
                 'role' => 'Faculty Supervisor',
                 'updated_at' => Carbon::now()
 
@@ -492,6 +497,8 @@ class AdminController extends Controller
 
             $getcompany = Company::where('id',$getcompanysup->company_id)->first();
 
+            $getuser = User::where('id',$getcompanysup->user_id)->first();
+
 
             //Check unique
             $checkcompanyname = Company::where('company_name',$request->input('company_name'))->count();
@@ -518,11 +525,18 @@ class AdminController extends Controller
                 return redirect()->back()->with('error', 'The IC already exist, Please try again');
             }
 
+            if(Hash::check($request->input('IC'), $getuser->password)){
+                $password = Hash::make($request->input('IC'));
+            }
+            else{
+                $password = $getuser->password;
+            }
+
         
             $user = User::where('id',$getcompanysup->user_id)->update([
                 'username' => $request->input('username'),
                 'email' => $request->input('email'),
-                'password' => Hash::make($request->input('IC')),
+                'password' => $password,
                 'role' => 'Company Supervisor',
                 'updated_at' => Carbon::now()
                 ]);
