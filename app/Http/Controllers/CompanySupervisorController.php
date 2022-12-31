@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Students;
 use App\CompanySupervisor;
-use App\logbooks;
 
 class CompanySupervisorController extends Controller
 {
@@ -23,15 +22,6 @@ class CompanySupervisorController extends Controller
       return view('CompanySupervisor.myStudents',compact('students'));
     }
 
-
-    public function logbooks($id)
-    {
-      $logbooks = logbooks::where('student_id',$id)->latest()->get();
-
-      $students =  Students::where('user_id',$id)->first();
-
-      return view('CompanySupervisor.logbooks',compact('logbooks','students'));
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -76,29 +66,7 @@ class CompanySupervisorController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        $ID = $request->input('ID');
-
-        $getLogbook = logbooks::where('id',$ID)->first();
-
-        $totalmarks = ($request->input('marks_company')+$getLogbook->marks_sv) / 200 * 100;
-
-        logbooks::where('id',$ID)->update([
-            "marks_company" => $request->input('marks_company'),
-            "total_marks" => $totalmarks,
-        ]);
-
-        return redirect()->back()->with('success', 'Logbook has been successfully updated !');
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      *

@@ -62,7 +62,7 @@
       <?php 
       $user = DB::table('users')->where('id',$student->user_id)->first(); ?>
       <td>
-        <a href="vLogs/{{ $student->user_id }}"><button type="button" class="btn btn-outline-info">Logbooks</button></a>
+       
 
         <button type="button" 
         data-bs-toggle="modal" 

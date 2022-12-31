@@ -37,14 +37,6 @@
 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
-
-@if($message = Session::get('error'))
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-<strong>Whoops !</strong> {{ session()->get('error') }}
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-@endif
-
       <div class="card">
         <div class="card-body pt-3">
           <!-- Bordered Tabs -->
@@ -57,12 +49,6 @@
             <li class="nav-item">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
             </li>
-
-            @if(auth()->user()->role == 'Company Supervisor' || auth()->user()->role == 'Faculty Supervisor' || auth()->user()->role == 'Admin')
-            <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
-                </li>
-            @endif
 
   
 
@@ -435,39 +421,6 @@
               </form><!-- End Profile Edit Form -->
 
             </div>
-
-            <div class="tab-pane fade pt-3" id="profile-change-password">
-                  <!-- Change Password Form -->
-                  <form action="changepass" method="POST" autocomplete="off" aria-autocomplete="off" enctype="multipart/form-data">
-              @csrf
-
-                    <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input  type="password" class="form-control" name="currentPassword" required>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input  type="password" class="form-control" name="newPassword" required>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input type="password" class="form-control" name="renewPassword" required>
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
-                    </div>
-                  </form><!-- End Change Password Form -->
-
-                </div>
 
           </div><!-- End Bordered Tabs -->
 
