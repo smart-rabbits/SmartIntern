@@ -175,4 +175,30 @@ class AuthenticationController extends Controller
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
+
+    public function changepass(Request $request){
+
+        $current_pass = $request->input('currentPassword');
+        $newpassword = $request->input('newPassword');
+        $renewpassword = $request->input('renewPassword');
+
+
+
+        if(Hash::check($current_pass, auth()->user()->password)){
+
+            if($newpassword != $renewpassword){
+                return redirect()->back()->with('error', 'New Password does not match with confirm password!');
+            }
+            User::where('id',auth()->user()->id)->update([
+                "password" =>  Hash::make($newpassword ),
+            ]);
+            return redirect()->back()->with('success', 'Password has been successfully updated!');
+        }
+        else{
+            return redirect()->back()->with('error', 'Incorrect Current Password!');
+        }
+
+
+
+    }
 }

@@ -133,19 +133,14 @@
         </a>
       </li><!-- End Profile Page Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="list">
-          <i class="bi bi-person"></i>
-          <span>Survey</span>
-        </a>
-      </li><!-- End Survey Page Nav -->
-
-
       @endif
 
       @if(auth()->user()->role == "Student")
       <li class="nav-item">
-        
+        <a class="nav-link collapsed" href="/MyLogbooks">
+          <i class="bi bi-journal-bookmark"></i>
+          <span>My Logbook</span>
+        </a>
       </li><!-- End Profile Page Nav -->
       @endif
 
@@ -165,13 +160,6 @@
           <span>My Students</span>
         </a>
       </li><!-- End Profile Page Nav -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="insert">
-          <i class="bi bi-person"></i>
-          <span>Survey</span>
-        </a>
-      </li><!-- End Survey Page Nav -->
-
       @endif
 
       <li class="nav-item">
