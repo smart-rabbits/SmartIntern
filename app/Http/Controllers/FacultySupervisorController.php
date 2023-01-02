@@ -23,6 +23,16 @@ class FacultySupervisorController extends Controller
       return view('FacultySupervisor.myStudents',compact('students'));
     }
 
+
+    public function logbooks($id)
+    {
+      $logbooks = logbooks::where('student_id',$id)->latest()->get();
+
+      $students =  Students::where('user_id',$id)->first();
+
+      return view('FacultySupervisor.logbooks',compact('logbooks','students'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -73,6 +83,21 @@ class FacultySupervisorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function update(Request $request)
+    {
+        $ID = $request->input('ID');
+
+        $getLogbook = logbooks::where('id',$ID)->first();
+
+        $totalmarks = ($request->input('marks_sv')+$getLogbook->marks_company) / 200 * 100;
+
+        logbooks::where('id',$ID)->update([
+            "marks_sv" => $request->input('marks_sv'),
+            "total_marks" => $totalmarks,
+        ]);
+
+        return redirect()->back()->with('success', 'Logbook has been successfully updated !');
+    }
 
     /**
      * Remove the specified resource from storage.

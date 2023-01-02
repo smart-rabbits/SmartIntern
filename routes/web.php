@@ -43,6 +43,8 @@ Route::get('deleteFsupervisor/{id}', 'AdminController@destroy2');
 Route::get('company', 'AdminController@company');
 Route::post('storecompany', 'AdminController@storecompany');
 Route::get('deleteCsupervisor/{id}', 'AdminController@destroy3');
+Route::get('MyStudentsAdmin','AdminController@index');
+Route::get('aLogs/{id}','AdminController@logbooks');
 
 //Student
 Route::get('MyLogbooks','StudentsController@index');
@@ -64,8 +66,19 @@ Route::get('exportusr', 'AuthenticationController@export')->name('export');
 
 
 //Supervisor Survey
-//Route::resource('svSurvey', 'SvController');
 Route::get('insert', 'SvController@show');
 Route::post('svSurvey', 'SvController@insert');
 Route::get('list', 'SvController@view');
 
+<<<<<<< HEAD
+//Student Survey
+Route::get('stuinsert', 'StuSurveyController@stushow');
+Route::post('stuSurvey', 'StuSurveyController@stuinsert');
+Route::get('stulist', 'StuSurveyController@stuview');
+
+//Student
+Route::get('MyLogbooks', 'StudentsController@index');
+Route::post('storelogbook', 'StudentsController@store');
+Route::get('deleteLogbook/{id}', 'StudentsController@destroy');
+=======
+>>>>>>> joey_branch

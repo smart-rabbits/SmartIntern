@@ -133,6 +133,31 @@
         </a>
       </li><!-- End Profile Page Nav -->
 
+<<<<<<< HEAD
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/MyStudentsAdmin">
+          <i class="bi bi-person"></i>
+          <span>Student Mark</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="stulist">
+          <i class="bi bi-person"></i>
+          <span>Student Survey</span>
+        </a>
+      </li><!-- End Survey Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="list">
+          <i class="bi bi-person"></i>
+          <span>Company Supervisor Survey</span>
+        </a>
+      </li><!-- End Survey Page Nav -->
+
+
+=======
+>>>>>>> joey_branch
       @endif
 
       @if(auth()->user()->role == "Student")
@@ -142,6 +167,14 @@
           <span>My Logbook</span>
         </a>
       </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="stuinsert">
+          <i class="bi bi-person"></i>
+          <span>Survey</span>
+        </a>
+      </li><!-- End Survey Page Nav -->
+
       @endif
 
       @if(auth()->user()->role == "Faculty Supervisor")
@@ -160,6 +193,17 @@
           <span>My Students</span>
         </a>
       </li><!-- End Profile Page Nav -->
+<<<<<<< HEAD
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="insert">
+          <i class="bi bi-person"></i>
+          <span>Survey</span>
+        </a>
+      </li><!-- End Survey Page Nav -->
+
+=======
+>>>>>>> joey_branch
       @endif
 
       <li class="nav-item">
@@ -170,12 +214,5 @@
       </li><!-- End Profile Page Nav -->
       
     </ul>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="insert">
-          <i class="bi bi-person"></i>
-          <span>Student Survey</span>
-        </a>
-    </li><!-- End Survey Page Nav -->
 
   </aside><!-- End Sidebar-->

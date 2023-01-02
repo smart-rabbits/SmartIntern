@@ -13,6 +13,24 @@ use App\CompanySupervisor;
 
 class AdminController extends Controller
 {
+    public function index()
+    {
+      $id = Admin::where('user_id',auth()->user()->id)->first()->id;
+
+      $students =  Students::where('admin_id',$id)->get();
+
+      return view('Admin.myStudents',compact('students'));
+    } 
+
+    public function logbooks($id)
+    {
+      $logbooks = logbooks::where('student_id',$id)->latest()->get();
+
+      $students =  Students::where('user_id',$id)->first();
+
+      return view('Admin.logbooks',compact('logbooks','students'));
+    }
+
     public function students(Request $request)
     {
 
@@ -425,6 +443,9 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Company has been successfully deleted !');
     }
 
+<<<<<<< HEAD
+}
+=======
 
 
     public function storecompany(Request $request){
@@ -610,3 +631,4 @@ class AdminController extends Controller
 
     
 }
+>>>>>>> joey_branch
