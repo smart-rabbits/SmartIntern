@@ -12,7 +12,7 @@
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="home">Home</a></li>
-      <li class="breadcrumb-item active">My Students</li>
+      <li class="breadcrumb-item active">Student Mark</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -21,7 +21,7 @@
       <div class="card">
             <div class="card-body">
 
-  <h5 class="card-title">My Students</h5>
+  <h5 class="card-title">Student Mark</h5>
 
   <br>
 
@@ -62,7 +62,7 @@
       <?php 
       $user = DB::table('users')->where('id',$student->user_id)->first(); ?>
       <td>
-        <a href="vLogs/{{ $student->user_id }}"><button type="button" class="btn btn-outline-info">Logbooks</button></a>
+       
 
         <button type="button" 
         data-bs-toggle="modal" 
@@ -160,7 +160,6 @@
                   <label for="inputPassword5" class="form-label">Year</label>
                   <input type="number" min="1900" max="2099" step="1" value="2022" class="form-control" id="Year" name="Year"  required>
                 </div>
-
                 <div class="col-12">
                   <label for="inputAddress5" class="form-label">Address</label>
                   <textarea class="form-control" id="address" name="address" rows="5" required></textarea>
@@ -218,8 +217,8 @@ $('#email').val(email).attr('disabled',true);
 $('#contact').val(contact).attr('disabled',true);
 $('#CGPA').val(cgpa).attr('disabled',true);
 $('#Faculty').val(faculty).attr('disabled',true);
-      $('#Course').val(course).attr('disabled',true);
-      $('#Year').val(year).attr('disabled',true);
+$('#Course').val(course).attr('disabled',true);
+$('#Year').val(year).attr('disabled',true);
 });
 
     });

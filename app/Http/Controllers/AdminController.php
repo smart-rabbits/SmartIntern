@@ -13,6 +13,24 @@ use App\CompanySupervisor;
 
 class AdminController extends Controller
 {
+    public function index()
+    {
+      $id = Admin::where('user_id',auth()->user()->id)->first()->id;
+
+      $students =  Students::where('admin_id',$id)->get();
+
+      return view('Admin.myStudents',compact('students'));
+    } 
+
+    public function logbooks($id)
+    {
+      $logbooks = logbooks::where('student_id',$id)->latest()->get();
+
+      $students =  Students::where('user_id',$id)->first();
+
+      return view('Admin.logbooks',compact('logbooks','students'));
+    }
+
     public function students(Request $request)
     {
 
@@ -117,8 +135,8 @@ class AdminController extends Controller
                 return redirect()->back()->with('error', 'The Matric Number already exist, Please try again');
             }
 
-            $student = User::where('id', $getstudent->user_id)->update([
 
+            $student = User::where('id', $getstudent->user_id)->update([
                 'username' => $request->input('username'),
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('IC')),
@@ -186,7 +204,6 @@ class AdminController extends Controller
                 'password' => Hash::make($request->input('IC')),
                 'role' => 'Faculty Supervisor',
                 'updated_at' => Carbon::now()
-
             ]);
 
             FacultySupervisor::Insert([
@@ -225,12 +242,18 @@ class AdminController extends Controller
                 return redirect()->back()->with('error', 'The Staff ID already exist, Please try again');
             }
 
+            if(Hash::check($request->input('IC'), $getuser->password)){
+                $password = Hash::make($request->input('IC'));
+            }
+            else{
+                $password = $getuser->password;
+            }
   
             $student = User::where('id',$getstaff->user_id)->update([
 
                 'username' => $request->input('username'),
                 'email' => $request->input('email'),
-                'password' => Hash::make($request->input('IC')),
+                'password' => $password,
                 'role' => 'Faculty Supervisor',
                 'updated_at' => Carbon::now()
 
@@ -420,179 +443,4 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Company has been successfully deleted !');
     }
 
-
-
-    public function storecompany(Request $request){
-
-        $TYPE = $request->input('TYPE');
-        $ID = $request->input('ID');
-
-        if($TYPE == "CREATE"){
-        
-        //Check unique
-        $checkcompanyname = Company::where('company_name',$request->input('company_name'))->count();
-
-        if($checkcompanyname > 0){
-            return redirect()->back()->with('error', 'The Company Name already exist, Please try again');
-        }
-
-        $checkcompanyemail = Company::where('company_email',$request->input('company_email'))->count();
-
-        if($checkcompanyemail > 0){
-            return redirect()->back()->with('error', 'The Company Email already exist, Please try again');
-        }
-
-        $checksupemail = CompanySupervisor::where('email',$request->input('email'))->count();
-
-        if($checksupemail > 0){
-            return redirect()->back()->with('error', 'The Supervisor Email already exist, Please try again');
-        }
-
-        $checkIC = CompanySupervisor::where('IC',$request->input('IC'))->count();
-
-        if($checkIC > 0){
-            return redirect()->back()->with('error', 'The IC already exist, Please try again');
-        }
-   
-        $user = User::insertGetId([
-            'username' => $request->input('username'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('IC')),
-            'role' => 'Company Supervisor',
-            'updated_at' => Carbon::now()
-            ]);
-
-        $company =         Company::insertGetId([
-            'company_name' => $request->input('company_name'),
-            'company_email' => $request->input('company_email'),
-            'company_address' => $request->input('company_address'),
-            'company_department' => $request->input('company_department'),
-            'updated_at' => Carbon::now()
-        ]);
-
-        CompanySupervisor::insertGetId([
-            'FullName' => $request->input('FullName'),
-            'user_id' => $user,
-            'IC' => $request->input('IC'),
-            'email' => $request->input('email'),
-            'gender' => $request->input('gender'),
-            'contact' => $request->input('contact'),
-            'company_id' =>  $company,
-            'updated_at' => Carbon::now()
-        ]);
-
-        
-
-
-
-            return redirect()->back()->with('success', 'Company has been successfully created !');
-        }
-        else if($TYPE == "EDIT"){
-            $getcompanysup = CompanySupervisor::where('id',$ID)->first();
-
-            $getcompany = Company::where('id',$getcompanysup->company_id)->first();
-
-
-            //Check unique
-            $checkcompanyname = Company::where('company_name',$request->input('company_name'))->count();
-
-            if($getcompany->company_name != $request->input('company_name') && $checkcompanyname > 0){
-                return redirect()->back()->with('error', 'The Company Name already exist, Please try again');
-            }
-
-            $checkcompanyemail = Company::where('company_email',$request->input('company_email'))->count();
-
-            if($getcompany->company_email != $request->input('company_email') && $checkcompanyemail > 0){
-                return redirect()->back()->with('error', 'The Company Email already exist, Please try again');
-            }
-
-            $checksupemail = CompanySupervisor::where('email',$request->input('email'))->count();
-
-            if($getcompanysup->email != $request->input('email') && $checksupemail > 0){
-                return redirect()->back()->with('error', 'The Supervisor Email already exist, Please try again');
-            }
-
-            $checkIC = CompanySupervisor::where('IC',$request->input('IC'))->count();
-
-            if($getcompanysup->IC != $request->input('IC') && $checkIC > 0){
-                return redirect()->back()->with('error', 'The IC already exist, Please try again');
-            }
-
-        
-            $user = User::where('id',$getcompanysup->user_id)->update([
-                'username' => $request->input('username'),
-                'email' => $request->input('email'),
-                'password' => Hash::make($request->input('IC')),
-                'role' => 'Company Supervisor',
-                'updated_at' => Carbon::now()
-                ]);
-    
-            $companysupervisor = CompanySupervisor::where('id',$ID)->update([
-                'FullName' => $request->input('FullName'),
-                'IC' => $request->input('IC'),
-                'email' => $request->input('email'),
-                'gender' => $request->input('gender'),
-                'contact' => $request->input('contact'),
-                'updated_at' => Carbon::now()
-            ]);
-    
-            Company::where('id', $getcompany->id)->update([
-                'company_name' => $request->input('company_name'),
-                'company_email' => $request->input('company_email'),
-                'company_address' => $request->input('company_address'),
-                'company_department' => $request->input('company_department'),
-                'updated_at' => Carbon::now()
-            ]);
-
-            return redirect()->back()->with('success', 'Company details has been successfully updated !');
-        }
-
-
-
-        
-    }
-
-
-
-    public function destroy($id){
-
-        $getstudent =   User::where('id',$id)->first();
-
-        Students::where('user_id',$getstudent->id)->delete();
-
-        User::where('id',$id)->delete();
-
-        return redirect()->back()->with('success', 'Student has been successfully deleted !');
-
-    }
-
-    public function destroy2($id){
-
-        $getstaff =   User::where('id',$id)->first();
-
-        FacultySupervisor::where('user_id',$getstaff->id)->delete();
-
-        User::where('id',$id)->delete();
-
-        return redirect()->back()->with('success', 'Faculty Staff has been successfully deleted !');
-
-    }
-
-    public function destroy3($id){
-
-        $getsup =   CompanySupervisor::where('id',$id)->first();
-
-        Company::where('id',$getsup->company_id)->delete();
-
-        User::where('id',$getsup->user_id)->delete();
-
-        CompanySupervisor::where('id',$id)->delete();
-
-        return redirect()->back()->with('success', 'Company has been successfully deleted !');
-
-    }
-
-
-
-    
 }

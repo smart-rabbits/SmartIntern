@@ -2,26 +2,30 @@
 
 namespace App\Http\Controllers;
 
-// use App\Notifications\ContactFormMessage;
 use App\Http\Controllers\Controller;
-use App\StuSurvey;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use DB;
 
 class StuSurveyController extends Controller
 {
-    public function show()
+    public function stushow()
     {
-        return view('stuSurvey.form');
+        return view('stuSurvey.stuform');
     }
 
-    public function index()
+    public function stuindex()
     {
         $stuSurvey = StuSurvey::all()->toArray();
-        return view('stuSurvey.index', compact('stuSurvey'));
+        return view('stuSurvey.stuindex', compact('stuSurvey'));
     }
 
-    public function insert(Request $request)
+    public function stuview()
+ {
+    $data = DB::table('studentsurvey')->get();
+    return view('stuSurvey.stuview', ['data'=> $data]);
+ }
+
+    public function stuinsert(Request $request)
     {
         $name = $request->input('name');
         $matricnumber = $request->input('matricnumber');
@@ -47,7 +51,6 @@ class StuSurveyController extends Controller
             'preferwhy' => $preferwhy,
         );
         DB::table('studentsurvey')->insert($data);
-        echo "Form submitted successfully.<br/>";
-        echo '<a href = "/insert">Click Here</a> to go back.';
+        return redirect()->back()->with('success', 'Survey has been successfully added !');
     }
 }

@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <form class="form-horizontal" method="POST" action="/stuSurvey" action="/action_page.php>
+      <form class="form-group" method="post" action="/stuSurvey" action="/action_page.php">
 
           {{ csrf_field() }}
               
@@ -51,7 +51,7 @@
           </div>
           <div class="form-group">
             <label for="compaddress">Address: </label>
-            <textarea type="text" class="form-control" id="compaddress" name="message" required> </textarea>
+            <textarea type="text" class="form-control" id="compaddress" name="compaddress" required> </textarea>
           </div>
           <div class="form-group">
             <label for="learn">What had you learn during the internship: </label>
