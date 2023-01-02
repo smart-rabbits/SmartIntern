@@ -28,8 +28,9 @@ Route::get('signout', 'AuthenticationController@signout');
 Route::get('home', 'HomeController@index');
 
 //profile
-Route::get('profile', 'AuthenticationController@profile');
-Route::post('profileupd', 'AuthenticationController@profileupd');
+Route::get('profile','AuthenticationController@profile');
+Route::post('profileupd','AuthenticationController@profileupd');
+Route::post('changepass','AuthenticationController@changepass');
 
 //Admin
 Route::get('students', 'AdminController@students');
@@ -44,6 +45,11 @@ Route::post('storecompany', 'AdminController@storecompany');
 Route::get('deleteCsupervisor/{id}', 'AdminController@destroy3');
 Route::get('MyStudentsAdmin','AdminController@index');
 Route::get('aLogs/{id}','AdminController@logbooks');
+
+//Student
+Route::get('MyLogbooks','StudentsController@index');
+Route::post('storelogbook','StudentsController@store');
+Route::get('deleteLogbook/{id}','StudentsController@destroy');
 
 //Faculty Supervisor
 Route::get('MyStudents','FacultySupervisorController@index');
@@ -64,6 +70,7 @@ Route::get('insert', 'SvController@show');
 Route::post('svSurvey', 'SvController@insert');
 Route::get('list', 'SvController@view');
 
+<<<<<<< HEAD
 //Student Survey
 Route::get('stuinsert', 'StuSurveyController@stushow');
 Route::post('stuSurvey', 'StuSurveyController@stuinsert');
@@ -73,3 +80,5 @@ Route::get('stulist', 'StuSurveyController@stuview');
 Route::get('MyLogbooks', 'StudentsController@index');
 Route::post('storelogbook', 'StudentsController@store');
 Route::get('deleteLogbook/{id}', 'StudentsController@destroy');
+=======
+>>>>>>> joey_branch

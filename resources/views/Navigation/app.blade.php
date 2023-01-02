@@ -133,6 +133,7 @@
         </a>
       </li><!-- End Profile Page Nav -->
 
+<<<<<<< HEAD
       <li class="nav-item">
         <a class="nav-link collapsed" href="/MyStudentsAdmin">
           <i class="bi bi-person"></i>
@@ -155,6 +156,8 @@
       </li><!-- End Survey Page Nav -->
 
 
+=======
+>>>>>>> joey_branch
       @endif
 
       @if(auth()->user()->role == "Student")
@@ -190,6 +193,7 @@
           <span>My Students</span>
         </a>
       </li><!-- End Profile Page Nav -->
+<<<<<<< HEAD
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="insert">
@@ -198,6 +202,8 @@
         </a>
       </li><!-- End Survey Page Nav -->
 
+=======
+>>>>>>> joey_branch
       @endif
 
       <li class="nav-item">
