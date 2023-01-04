@@ -12,7 +12,7 @@
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="home">Home</a></li>
-      <li class="breadcrumb-item active">Student Mark</li>
+      <li class="breadcrumb-item active">My Students</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -21,7 +21,7 @@
       <div class="card">
             <div class="card-body">
 
-  <h5 class="card-title">Student Mark</h5>
+  <h5 class="card-title">My Students</h5>
 
   <br>
 
@@ -62,25 +62,8 @@
       <?php 
       $user = DB::table('users')->where('id',$student->user_id)->first(); ?>
       <td>
-       
+        <a href="aLogs/{{ $student->user_id }}"><button type="button" class="btn btn-outline-info">Logbooks</button></a>
 
-        <button type="button" 
-        data-bs-toggle="modal" 
-        data-bs-target="#ExtralargeModal" 
-        data-name="{{ $student->FullName }}"
-        data-ic="{{ $student->IC }}"
-        data-matricno="{{ $student->matricNum }}"
-        data-gender="{{ $student->gender }}"
-        data-contact="{{ $student->contact }}"
-        data-address="{{ $student->address }}"
-        data-username="{{ $user->username }}"
-        data-email="{{ $user->email }}" 
-        data-cgpa="{{ $student->CGPA }}"
-        data-faculty="{{ $student->Faculty }}"
-        data-course="{{ $student->Course }}"
-        data-year="{{ $student->Year }}"
-        class="btn btn-outline-warning view">View</button>        
-     
 
     </td>
     </tr>

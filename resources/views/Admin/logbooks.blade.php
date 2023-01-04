@@ -25,19 +25,7 @@
 
   <br>
 
-@if($message = Session::get('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-<strong>Yay !</strong> {{ session()->get('success') }}
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-@endif
 
-@if($message = Session::get('error'))
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-<strong>Whoops !</strong> {{ session()->get('error') }}
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-@endif
 
 <!-- Table with stripped rows -->
 <table class="table table-striped" id="mytable">
@@ -47,7 +35,7 @@
       <th scope="col">Type</th>
       <th scope="col">Logbook Date & Time</th>
       <th scope="col">Total Marks</th>
-      <th scope="col">Action</th>
+     
     </tr>
   </thead>
   <tbody>
@@ -60,16 +48,7 @@
       <td>
 
 
-        <button type="button" data-bs-toggle="modal" data-bs-target="#ExtralargeModal" 
-        data-id="{{ $logbook->id }}"
-        data-type="{{ $logbook->type }}"
-        data-notes="{{ $logbook->notes }}"
-        data-marks_sv="{{ $logbook->marks_sv }}"
-        data-marks_company="{{ $logbook->marks_company }}"
-        data-total_marks="{{ $logbook->total_marks }}"
-        data-document="{{ $logbook->document }}"
         
-        class="btn btn-outline-info view">View & Update</button>
         
   
     </td>
@@ -98,7 +77,7 @@
             <div class="card-body">
               <!-- Multi Columns Form -->
 
-              <form class="row g-3" action="../compupdatemarks" method="POST" autocomplete="off" aria-autocomplete="off" enctype="multipart/form-data">
+              
     @csrf
     <input type="hidden" name="TYPE" id="TYPE" value="CREATE">
     <input type="hidden" name="ID" id="ID">
@@ -134,7 +113,7 @@
                 <div class="col-md-6">
        
                   <label for="inputName5" class="form-label">Company Supervisor Marks</label>
-                  <input type="number" step=".01" class="form-control" id="marks_company" name="marks_company" min="1" max="100" >
+                  <input type="number" step=".01" class="form-control" id="marks_company" name="marks_company" disabled>
                 </div>
                 <div class="col-md-6">
                   <label for="inputPassword5" class="form-label">Total Marks</label>
@@ -146,13 +125,7 @@
             </div>
 
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" id="submit" class="btn btn-primary">Update</button>
-                    </div>
-                    </form><!-- End Multi Columns Form -->
-                  </div>
-                </div>
+                    
               </div><!-- End Extra Large Modal-->
 
 
@@ -162,36 +135,7 @@
   </main><!-- End #main -->
 
   <script>
-    $(document).ready(function() {
-
-      $('#mytable').DataTable();
-
-$(document).on("click",".view",function() {
-
-
-
-    var id = $(this).data('id');
-      var type = $(this).data('type');
-      var notes = $(this).data('notes');
-      var marks_sv = $(this).data('marks_sv');
-      var marks_company = $(this).data('marks_company');
-      var total_marks = $(this).data('total_marks');
-      var document = $(this).data('document');
-
-      $('.doc_exist').show();
-      $('#document').attr('required',false);
-      $("#docurl").attr("href", "../Logbook/"+document);
-      $('#doc').hide();
-      $('#document').hide();
-    $('#ID').val(id);
-    $('#TYPE').val('EDIT');
-    $('#type_col').val(type).attr('disabled',true);
-    $('#notes').val(notes).attr('disabled',true);
-    $('#marks_sv').val(marks_sv);
-    $('#marks_company').val(marks_company);
-    $('#total_marks').val(total_marks+'%');
-
-});
+    
 
     });
   </script>

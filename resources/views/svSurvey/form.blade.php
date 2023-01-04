@@ -80,3 +80,6 @@
 </html>
 
 </section>
+</main><!-- End #main -->
+
+@include('Navigation.footer')
