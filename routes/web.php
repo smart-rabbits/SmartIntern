@@ -70,7 +70,6 @@ Route::get('insert', 'SvController@show');
 Route::post('svSurvey', 'SvController@insert');
 Route::get('list', 'SvController@view');
 
-<<<<<<< HEAD
 //Student Survey
 Route::get('stuinsert', 'StuSurveyController@stushow');
 Route::post('stuSurvey', 'StuSurveyController@stuinsert');
@@ -80,5 +79,3 @@ Route::get('stulist', 'StuSurveyController@stuview');
 Route::get('MyLogbooks', 'StudentsController@index');
 Route::post('storelogbook', 'StudentsController@store');
 Route::get('deleteLogbook/{id}', 'StudentsController@destroy');
-=======
->>>>>>> joey_branch
