@@ -121,7 +121,7 @@
                   <select id="type_col" name="type_col" class="form-select" required>
                   <option value="" selected disabled>-- Select Logbook Type --</option>
                   <option value="Daily">Daily</option>
-                  <option value="Weekly">Weekly</option>
+                  
                  </select>
                 </div>
                 <div class="col-md-6">
