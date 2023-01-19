@@ -48,31 +48,7 @@ $totalweekly = App\logbooks::where('student_id',auth()->user()->id)->where('type
               </div>
             </div><!-- End Sales Card -->
 
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
-
-
-                <div class="card-body">
-                  <h5 class="card-title">Total Weekly Logbook</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-journal-text"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $totalweekly }}</h6>
-                   
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Revenue Card -->
-            </div><!-- End Revenue Card -->
-            </div><!-- End Revenue Card -->
-
+           
             @elseif(auth()->user()->role == 'Admin')
             <?php
 $totalstudent = App\User::where('role','Student')->count();
