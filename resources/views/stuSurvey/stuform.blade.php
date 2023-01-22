@@ -36,27 +36,27 @@
               
           <div class="form-group">
             <label for="name">Name: </label>
-            <input type="text" class="form-control" id="name" placeholder="Full Name" name="name" required>
+            <input type="text" class="form-control" id="name" name="name" required>
           </div>
           <div class="form-group">
             <label for="matricnumber">Matric Number: </label>
-            <input type="text" class="form-control" id="matricnumber" placeholder="A00EX0000" name="matricnumber" required>
+            <input type="text" class="form-control" id="matricnumber" name="matricnumber" required>
           </div>
           <div class="form-group">
             <label for="contact">Contact: </label>
-            <input type="text" class="form-control" id="contact" placeholder="012-3456789" name="contact" required>
+            <input type="text" class="form-control" id="contact"  name="contact" required>
           </div>
           <div class="form-group">
             <label for="email">Email: </label>
-            <input type="text" class="form-control" id="email" placeholder="name@gmail.com" name="email" required>
+            <input type="text" class="form-control" id="email"  name="email" required>
           </div>
           <div class="form-group">
-            <label for="yearcourse">Year and Course of Study: </label>
-            <input type="text" class="form-control" id="yearcourse" placeholder="2/SXXX" name="yearcourse" required>
+            <label for="yearcourse">Course of Study: </label>
+            <input type="text" class="form-control" id="yearcourse"  name="yearcourse" required>
           </div>
           <div class="form-group">
             <label for="company">Company of Internship: </label>
-            <input type="text" class="form-control" id="company" placeholder="Sinar Sdn.Bhd" name="company" required>
+            <input type="text" class="form-control" id="company"  name="company" required>
           </div>
           <div class="form-group">
             <label for="compaddress">Address: </label>
